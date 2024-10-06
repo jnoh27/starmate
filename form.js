@@ -95,23 +95,48 @@ document.getElementById('starmateForm').addEventListener('submit', function(even
         preference3,
         selectedImages
     };
-
-    // Send data to the server
-    fetch('/get_image', {
-        method: 'POST',
+    
+    fetch('http://localhost:5000/get_image', {  // Flask 서버 URL 경로 확인
+        method: 'POST',  // 메소드가 Flask와 일치해야 합니다.
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData)  // formData를 JSON 형태로 변환
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
     .then(data => {
         if (data.image) {
             localStorage.setItem('selectedImage', JSON.stringify(data.image));
             window.location.href = 'results.html';
         } else {
-            alert("No suitable images found.");
+            alert('No suitable images found.');
         }
     })
     .catch(error => console.error('Error:', error));
-});
+
+//     // Send data to the server
+//     fetch('/get_image', {
+//         method: 'POST',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify(formData)
+//     })
+//     .then(response => response.json())
+//     .then(data => {
+//         if (data.image) {
+//             localStorage.setItem('selectedImage', JSON.stringify(data.image));
+//             window.location.href = 'results.html';
+//         } else {
+//             alert("No suitable images found.");
+//         }
+//     })
+//     .catch(error => console.error('Error:', error));
+// });
+
+
