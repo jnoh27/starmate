@@ -9,6 +9,9 @@ color_info = item['facts'].get('Color Info', '')
 import json
 import random
 from flask import Flask, render_template, request, jsonify
+from flask_cors import CORS
+
+CORS(app)  # This will enable CORS for all routes
 
 app = Flask(__name__)
 
@@ -16,7 +19,7 @@ app = Flask(__name__)
 def index():
     return render_template('survey.html')  # Input HTML file for user preferences
 
-@app.route('/get_image', methods=['POST'])
+@app.route('/get_image', methods=['POST','GET'])
 def get_image():
     # Get user inputs from the request
     user_inputs = request.json
