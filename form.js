@@ -80,7 +80,7 @@ document.getElementById('starmateForm').addEventListener('submit', function(even
 
     const vastness = document.getElementById('preference1').checked;
     const distance = document.getElementById('preference2').checked;
-    const vrabrance = document.getElementById('preference3').checked;
+    const vibrance = document.getElementById('preference3').checked;
 
 
     const formData = {
@@ -93,7 +93,7 @@ document.getElementById('starmateForm').addEventListener('submit', function(even
         violet,
         vastness,
         distance,
-        vrabrance
+        vibrance
     };
 
     // Send data to the server
