@@ -97,7 +97,7 @@ document.getElementById('starmateForm').addEventListener('submit', function(even
     };
 
     // Send data to the server
-    fetch('/get_image', {
+    fetch('https://starmate.earth/get_image', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
