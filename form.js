@@ -61,8 +61,6 @@ imageButtons.forEach(button => {
 });
 
 document.getElementById('starmateForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-
     const name = document.getElementById('name').value;
 
     const red = document.getElementById('red').checked;
