@@ -60,14 +60,8 @@ imageButtons.forEach(button => {
     });
 });
 
-// Modified the submit button event listener to ensure proper form submission
 document.getElementById('starmateForm').addEventListener('submit', function(event) {
     event.preventDefault();
-
-    if (!validateStep(currentStep)) {
-        alert("Please complete all required fields before submitting.");
-        return;
-    }
 
     const name = document.getElementById('name').value;
 
@@ -110,12 +104,7 @@ document.getElementById('starmateForm').addEventListener('submit', function(even
         },
         body: JSON.stringify(formData)
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
+    .then(response => response.json())
     .then(data => {
         if (data.image) {
             localStorage.setItem('selectedImage', JSON.stringify(data.image));
@@ -124,8 +113,5 @@ document.getElementById('starmateForm').addEventListener('submit', function(even
             alert("No suitable images found.");
         }
     })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('There was an error submitting the form. Please try again later.');
-    });
+    .catch(error => console.error('Error:', error));
 });
