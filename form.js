@@ -104,14 +104,22 @@ document.getElementById('starmateForm').addEventListener('submit', function(even
         },
         body: JSON.stringify(formData)
     })
-    .then(response => response.json())
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok: ' + response.statusText);
+        }
+        return response.json();
+    })
     .then(data => {
-        if (data.image) {
+        if (data && data.image) {
             localStorage.setItem('selectedImage', JSON.stringify(data.image));
             window.location.href = 'results.html';
         } else {
-            alert("No suitable images found.");
+            alert("No suitable images found. Please try again.");
         }
     })
-    .catch(error => console.error('Error:', error));
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while processing your request. Please try again later.');
+    });
 });
